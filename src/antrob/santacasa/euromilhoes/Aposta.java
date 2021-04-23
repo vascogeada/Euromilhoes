@@ -1,5 +1,7 @@
 package antrob.santacasa.euromilhoes;
 
+import java.util.Arrays;
+import java.util.Random;
 
 //import java.util.Arrays;
 //import java.util.Random;
@@ -31,20 +33,30 @@ package antrob.santacasa.euromilhoes;
 public class Aposta {
 	
 	// Uma aposta do Euromilhoes é composta por 5 numeros inteiros e 2 estrelas
-	// private int[] numeros;
-	// private int[] estrelas;
+	private int[] numeros;
+	private int[] estrelas;
+	private int acertos;
+	 
+	// Gera uma aposta aleatória 
+	Random random = new Random();
 	
-	
-	// Gera uma aposta aleatória
 	/**
 	 * Cria um objecto <code>Aposta</code> com números e estrelas gerados aleatóriamente
 	 * 
 	 */
+	
+
+		
 	public Aposta() {
+		//Gerar 2 estrelas, entre 1 e 12
+		for (int i = 0; i <= 1; i++) {
+			estrelas[i] = random.nextInt(12);
+		}
 		
-		
-		
-		
+		//Gerar 5 números inteiros, entre 1 e 50
+		for (int i = 0; i < 50; i++) {
+			numeros[i] = random.nextInt(50);
+		}
 	}
 	
 
@@ -63,21 +75,48 @@ public class Aposta {
 		// Item 49 Check parameters for validity
 		
 		// Tem de ser 5 numeros
-		
+		if(getNumeros().length != 5) {
+			IllegalArgumentException("Tem que ter 5 números");
+		}
 		
 		// Os numeros tem de estar no intervalo de 1 a 50
-		
+		for (int i = 0; i < numeros.length; i++) {
+			if(numeros[i] < 1 || numeros[i] > 50) {
+				IllegalArgumentException("Os números têm que ser entre 1 e 50");
+			}
+		}
 		
 		// Nao podem haver numeros iguais
-		
+		for (int i = 0; i < numeros.length - 1; i++) {
+			if(numeros[i] == numeros[i + 1]) {
+				IllegalArgumentException("Os números não podem ser iguais");
+			}
+		}
 		
 		// Tem de ser 2 estrelas
-		
+		if(getEstrelas().length != 5) {
+			IllegalArgumentException("Tem que ter 5 números");
+		}
 		
 		// As estrelas tem de estar no intervalo de 1 a 12
-		
+		for (int i = 0; i < estrelas.length; i++) {
+			if(estrelas[i] < 1 || estrelas[i] > 12) {
+				IllegalArgumentException("As estrelas têm que ser entre 1 e 12");
+			}
+		}
 		
 		// Nao podem haver estrelas iguais
+		// As estrelas tem de estar no intervalo de 1 a 12
+		for (int i = 0; i < estrelas.length - 1; i++) {
+			if(estrelas[i] == estrelas[i + 1]) {
+				IllegalArgumentException("As estrelas têm que ser entre 1 e 12");
+			}
+		}
+	}
+
+
+	private void IllegalArgumentException(String string) {
+		// TODO Auto-generated method stub
 		
 	}
 
@@ -95,11 +134,9 @@ public class Aposta {
 	 * @return array com os números da aposta ordenados por ordem crescente
 	 */
 	public int[] getNumeros() {
-		// Item 50 Make defensive copies when needed
+		// Item 50 Make defensive copies when needed	
 		
-		
-		
-		return null;
+		return numeros;
 	}
 
 
@@ -114,8 +151,7 @@ public class Aposta {
 	public int[] getEstrelas() {
 		// Item 50 Make defensive copies when needed
 		
-		
-		return null;
+		return estrelas;
 	}
 	
 	/**
@@ -147,11 +183,9 @@ public class Aposta {
 	 * 
 	 * @return Uma string com a representação de uma aposta 
 	 */
-	@Override public String toString() {
-		// Item 12: Always override toString
-		
-		
-		return null;
+	@Override
+	public String toString() {
+		return "Aposta [numeros=" + Arrays.toString(numeros) + ", estrelas=" + Arrays.toString(estrelas) + "]";
 	}	
 				
 	
